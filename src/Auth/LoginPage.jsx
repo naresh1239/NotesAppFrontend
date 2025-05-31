@@ -19,6 +19,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { AuthUserApi } from '../store/Reducers/AuthUserReducer';
 import { useDispatch } from 'react-redux';
+import toast, { Toaster } from 'react-hot-toast';
 
 function LoginPage() {
   const [remember, setRemember] = useState(false);
@@ -48,10 +49,12 @@ function LoginPage() {
       );
 
       if (response.status == 200) {
+        toast.success('Login successfully')
          dispatch(AuthUserApi())
         navigate('/');
       }
     } catch (error) {
+      toast.error(error.response?.data?.error || 'Login failed, please try again');
       console.error(error);
     }
   };
@@ -74,6 +77,8 @@ function LoginPage() {
         padding: 2,
       }}
     >
+        <Toaster />
+
       <Container maxWidth="sm">
         <Paper
           elevation={5}
