@@ -61,7 +61,7 @@ function LoginPage() {
 
   useEffect(() => {
     setTimeout(() => {
-      trigger(); // Helps detect autofill values
+      trigger(); 
     }, 200);
   }, [trigger]);
 
