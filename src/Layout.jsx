@@ -63,7 +63,7 @@ const Layout = () => {
 
 
 
-  // if (AuthUser.isLoading) return <div>Loading...</div>;
+  if (AuthUser.isLoading) return <div>Loading...</div>;
    if ( !AuthUser.data.success) return <Navigate to="/LoginToNotes" />;
 
     return (
