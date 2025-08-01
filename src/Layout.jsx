@@ -62,7 +62,11 @@ const Layout = () => {
     };
 
 useEffect(() => {
-  if ( !AuthUser.data.success) return <Navigate to="/LoginToNotes" />;
+  if ( !AuthUser.data.success){
+ return <Navigate to="/LoginToNotes" />
+  }else{
+    return <Navigate to="/" />
+  }
 }, [AuthUser.data.success])
 
 
