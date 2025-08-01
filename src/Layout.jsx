@@ -61,10 +61,13 @@ const Layout = () => {
       setAnchorEl(null);
     };
 
+useEffect(() => {
+  if ( !AuthUser.data.success) return <Navigate to="/LoginToNotes" />;
+}, [AuthUser.data.success])
 
 
-  if (AuthUser.isLoading) return <div>Loading...</div>;
-   if ( !AuthUser.data.success) return <Navigate to="/LoginToNotes" />;
+  // if (AuthUser.isLoading) return <div>Loading...</div>;
+  //  if ( !AuthUser.data.success) return <Navigate to="/LoginToNotes" />;
 
     return (
       <>
