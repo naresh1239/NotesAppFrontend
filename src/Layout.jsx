@@ -15,6 +15,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { Toggle} from './store/Reducers/CounterReducer'
 import {fetchSidebarlinks} from "./store/Reducers/NavlinkReducer"
+import Home from './Home';
 
 const Layout = () => {
    const userData = useSelector((state) => state.AuthUserReducer.data)
@@ -61,17 +62,12 @@ const Layout = () => {
       setAnchorEl(null);
     };
 
-useEffect(() => {
-  if ( !AuthUser.data.success){
- return <Navigate to="/LoginToNotes" />
-  }else{
-    return <Navigate to="/" />
-  }
-}, [AuthUser.data.success])
 
 
-  // if (AuthUser.isLoading) return <div>Loading...</div>;
-  //  if ( !AuthUser.data.success) return <Navigate to="/LoginToNotes" />;
+
+
+  if (AuthUser.isLoading) return <Home/>;
+   if ( !AuthUser.data.success) return <Navigate to="/LoginToNotes" />;
 
     return (
       <>
