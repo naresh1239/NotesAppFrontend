@@ -27,7 +27,7 @@ const AppRoutes = () => {
     <BrowserRouter>
       <Routes>
         <Route element={<PublicRoute />}>
-          <Route path="/SignInToNotes" element={<SignIn />} />
+          <Route path="/SiginToNotes" element={<SignIn />} />
           <Route path="/LoginToNotes" element={<LoginPage />} />
           <Route path="/OtpVerfiy/:mail" element={<OtpVerify />} />
           <Route path="/readNotesPublic/:id" element={<PublicPost />} />
