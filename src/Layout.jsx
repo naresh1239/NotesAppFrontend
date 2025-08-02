@@ -1,12 +1,11 @@
 
 import { Navigate, Outlet, useNavigate } from 'react-router-dom'
 import React, { useEffect, useState } from 'react';
-import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import './App.css'; // Optional: use a separate CSS file
 import {
-  AppBar, Box, Button, CssBaseline, Drawer, IconButton,
-  Toolbar, Typography, Avatar, List, ListItem, ListItemText,
+  AppBar, Box, Button, CssBaseline,
+  Toolbar, Typography, Avatar, ListItemText,
   Menu,
   MenuItem
 } from '@mui/material';
@@ -23,6 +22,7 @@ const Layout = () => {
    const dispatch = useDispatch()
    const {data,isLoading} = useSelector((state)=> state.fetchSidebarReducer)
    const AuthUser = useSelector((state)=> state.AuthUserReducer)
+
 
    const navigate = useNavigate()
   //  console.log({AuthUser})
@@ -66,8 +66,8 @@ const Layout = () => {
 
 
 
-  if (AuthUser.isLoading) return <Home/>;
-   if ( !AuthUser.data.success) return <Navigate to="/LoginToNotes" />;
+  if (isLoading) return <h1>loading</h1>;
+   if (data.error) return <Navigate to="/LoginToNotes" />;
 
     return (
       <>
@@ -136,7 +136,7 @@ const Layout = () => {
         >
           {isLoading
             ? 'Loading...'
-            : data.map((item, index) => (
+            : data.length > 0 && data?.map((item, index) => (
                 <Box
                   key={index}
                   sx={{

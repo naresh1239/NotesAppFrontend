@@ -4,13 +4,15 @@ import { Navigate, Outlet } from 'react-router-dom'
 import { AuthUserApi } from './store/Reducers/AuthUserReducer';
 
 function PublicRoute() {
-    const AuthUser = useSelector((state)=> state.AuthUserReducer)
+    const AuthUser = useSelector((state)=> state.fetchSidebarReducer)
     const dispatch = useDispatch()
 
+    console.log({AuthUser})
     useEffect(() => {
       dispatch(AuthUserApi())
     }, [])
-    //  if (AuthUser.isError || !AuthUser.data.success) return <Navigate to="/" />;
+
+      // if (AuthUser.data) return <Navigate to="/" />;
     
   return (
     <Outlet/>

@@ -12,20 +12,21 @@ import {
   InputAdornment,
   IconButton,
 } from '@mui/material';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
 import axios from 'axios';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { AuthUserApi } from '../store/Reducers/AuthUserReducer';
 import { useDispatch } from 'react-redux';
 import toast, { Toaster } from 'react-hot-toast';
-
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 function LoginPage() {
   const [remember, setRemember] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const [showPassword, setShowPassword] = React.useState(false);
+  const [loading, setloading] = useState(false)
 
   const {
     register,
@@ -37,6 +38,7 @@ function LoginPage() {
   });
 
   const handleLogin = async (data) => {
+    setloading(true)
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_URL}/Login`,
@@ -57,6 +59,9 @@ function LoginPage() {
       toast.error(error.response?.data?.error || 'Login failed, please try again');
       console.error(error);
     }
+    finally{
+      setloading(false)
+    }
   };
 
   useEffect(() => {
@@ -65,6 +70,11 @@ function LoginPage() {
     }, 200);
   }, [trigger]);
 
+
+
+  const handleClickShowPassword = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
   return (
     <Box
       sx={{
@@ -110,10 +120,23 @@ function LoginPage() {
 
             <TextField
               fullWidth
+              type={showPassword ? 'text' : 'password'}
               margin="normal"
               label="Password"
               variant="outlined"
-              type="password"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
               endAdornment={<InputAdornment position="end">kg</InputAdornment>}
               autoComplete="current-password"
               {...register('password', {
@@ -142,6 +165,7 @@ function LoginPage() {
               label="Remember me"
             />
             <Button
+            loading={loading}
               type="submit"
               fullWidth
               variant="contained"

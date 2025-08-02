@@ -40,7 +40,8 @@ const ReadNotes = () => {
                    des:  data.des
              })
             
-          } catch (error) {;
+          } catch (error) {
+            toast.error('Failed to fetch note data. Please try again later.');
             console.error(error);
           }
     }
