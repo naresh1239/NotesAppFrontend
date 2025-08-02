@@ -66,7 +66,7 @@ const Layout = () => {
 
 
 
-  if (isLoading) return <h1>loading</h1>;
+  // if (isLoading) return <h1>loading</h1>;
    if (data.error) return <Navigate to="/LoginToNotes" />;
 
     return (
