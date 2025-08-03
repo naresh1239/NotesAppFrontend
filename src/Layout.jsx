@@ -14,7 +14,6 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { Toggle} from './store/Reducers/CounterReducer'
 import {fetchSidebarlinks} from "./store/Reducers/NavlinkReducer"
-import Home from './Home';
 import Cookies from 'js-cookie';
 
 const Layout = () => {

@@ -1,13 +1,12 @@
 import { Outlet, useNavigate } from 'react-router-dom'
-import React, { useEffect, useState } from 'react';
-import ReactQuill, { Quill } from 'react-quill';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { Box, Button, Switch, TextField, TextareaAutosize } from '@mui/material';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 import Editor from './Editor';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSidebarlinks } from './store/Reducers/NavlinkReducer';
-import PreviewScreen from './PreviewScreen';
+const PreviewScreen = lazy(()=> import( './PreviewScreen'));
 
 const CreateNotes = () => {
     const userData = useSelector((state) => state.AuthUserReducer.data)
@@ -86,7 +85,17 @@ const CreateNotes = () => {
            <Editor value={value} setValue={setValue}/>
            </div>
 
-            <PreviewScreen value={value}/>
+            <Suspense fallback={
+                <Box sx={{ width: '100%' }}>
+                    <div style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <h1>Loading...</h1>
+                    </div>
+                </Box>
+            }>
+                 <PreviewScreen value={value}/>
+
+            </Suspense>
+           
         </>
     )
 }
