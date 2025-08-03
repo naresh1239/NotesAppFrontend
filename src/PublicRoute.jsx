@@ -7,7 +7,7 @@ function PublicRoute() {
     const AuthUser = useSelector((state)=> state.fetchSidebarReducer)
     const dispatch = useDispatch()
 
-    console.log({AuthUser})
+
     useEffect(() => {
       dispatch(AuthUserApi())
     }, [])

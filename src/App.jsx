@@ -21,7 +21,7 @@ const AppRoutes = () => {
 
   useEffect(() => {
     dispatch(AuthUserApi())
-  }, [dispatch])
+  }, [])
 
   return (
     <BrowserRouter>
