@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Toggle} from './store/Reducers/CounterReducer'
 import {fetchSidebarlinks} from "./store/Reducers/NavlinkReducer"
 import Home from './Home';
+import Cookies from 'js-cookie';
 
 const Layout = () => {
    const userData = useSelector((state) => state.AuthUserReducer.data)
@@ -22,7 +23,7 @@ const Layout = () => {
    const dispatch = useDispatch()
    const {data,isLoading} = useSelector((state)=> state.fetchSidebarReducer)
    const AuthUser = useSelector((state)=> state.AuthUserReducer)
-
+  const token = Cookies.get('isValidUserTime');
 
    const navigate = useNavigate()
   //  console.log({AuthUser})
@@ -67,7 +68,7 @@ const Layout = () => {
 
 
   // if (isLoading) return <h1>loading</h1>;
-   if (data.error) return <Navigate to="/LoginToNotes" />;
+   if (!token) return <Navigate to="/LoginToNotes" />;
 
     return (
       <>

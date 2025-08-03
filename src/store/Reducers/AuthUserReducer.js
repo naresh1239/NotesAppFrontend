@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-
+import Cookies from 'js-cookie';
 
 
 export const AuthUserApi = createAsyncThunk("AuthUserApi", async () => {
@@ -27,11 +27,16 @@ const checkAuthValidUser = createSlice({
         builder.addCase(AuthUserApi.fulfilled, (state, action) => {
             state.isLoading = false;
             state.data = action.payload;
-        
+            Cookies.set('isValidUserTime', true, {
+                path: '/',
+                sameSite: 'Strict',
+                secure: true, 
+              });
         })
         builder.addCase(AuthUserApi.rejected, (state, action) => {
             state.isLoading = false,
             state.isError = true;
+            Cookies.remove('isValidUserTime');
         })
     }
 });
