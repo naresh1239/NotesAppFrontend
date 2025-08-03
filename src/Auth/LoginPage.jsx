@@ -109,10 +109,9 @@ function LoginPage() {
             <TextField
               fullWidth
               margin="normal"
-              label="Email"
+              label="Email OR Username"
               variant="outlined"
-              type="email"
-              autoComplete="email"
+              type="input"
               {...register('email', { required: 'Email is required' })}
               error={!!errors.email}
               helperText={errors.email?.message}
