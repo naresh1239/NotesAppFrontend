@@ -40,6 +40,8 @@ const Layout = () => {
         );
   
         if (response.status === 200) {
+          Cookies.remove('isValidUserTime');
+          Cookies.remove('token');
           navigate(`/LoginToNotes`);
         }
       } catch (error) {
